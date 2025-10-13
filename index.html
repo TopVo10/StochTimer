@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StochTimer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Navigation / Header ===== -->
+  <header class="topbar">
+    <div class="brand">🕒 StochTimer</div>
+    <nav class="tabs">
+      <button id="tabSettings" class="tab active" type="button">Einstellungen</button>
+      <button id="tabRun" class="tab" type="button">Training</button>
+      <button id="btnFullscreen" class="ghost" type="button" title="Vollbild umschalten">Vollbild</button>
+    </nav>
+  </header>
+
+  <!-- ===== VIEW: Einstellungen ===== -->
+  <main id="view-settings" class="view active">
+
+    <!-- ===== Übungen ===== -->
+    <section>
+      <h2>Übungen</h2>
+      <div class="row">
+        <input id="exerciseInput" type="text" placeholder="Übung eingeben …" />
+        <button id="addExercise">Hinzufügen</button>
+      </div>
+      <ul id="exerciseList"></ul>
+    </section>
+
+    <!-- ===== Einstellungen ===== -->
+    <section>
+      <h2>Einstellungen</h2>
+
+      <div class="row">
+        <div>
+          <label>Belastungszeiten (Sek.)</label>
+          <input id="workOptions" type="text" value="20,30,40,45,60" />
+        </div>
+        <div>
+          <label>Pausenzeiten (Sek.)</label>
+          <input id="restOptions" type="text" value="10,15,20,30" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Modus</label>
+          <select id="mode">
+            <option value="rounds" selected>Runden</option>
+            <option value="minutes">Minuten</option>
+          </select>
+        </div>
+        <div>
+          <label id="modeLabel">Runden</label>
+          <input id="modeValue" type="number" value="20" min="1" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Wiederholungen vermeiden</label>
+          <select id="noRepeat">
+            <option value="off">aus</option>
+            <option value="exercise">Übung</option>
+            <option value="both" selected>beides</option>
+          </select>
+        </div>
+        <div>
+          <label>3-2-1 Vorbereitung</label>
+          <select id="prep">
+            <option value="true" selected>ja</option>
+            <option value="false">nein</option>
+          </select>
+        </div>
+      </div>
+
+      <hr />
+      <h3>Sprachansage</h3>
+
+      <div class="row">
+        <div>
+          <label>Sprachansage</label>
+          <select id="ttsToggle">
+            <option value="true" selected>an</option>
+            <option value="false">aus</option>
+          </select>
+        </div>
+        <div>
+          <label>Stimme</label>
+          <select id="voiceSelect">
+            <option value="">(Standardstimme)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Sprechgeschwindigkeit</label>
+          <input id="ttsRate" type="number" min="0.5" max="2" step="0.1" value="1.0" />
+        </div>
+        <div style="align-self:flex-end;">
+          <button id="ttsTestBtn" class="ghost" type="button">Stimme testen</button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:1rem;">
+        <button id="saveSettings">Speichern</button>
+        <button id="exportBtn" class="ghost">Exportieren</button>
+        <button id="importBtn" class="ghost">Importieren</button>
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+        <button id="clearBtn" class="ghost">Zurücksetzen</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== VIEW: Training ===== -->
+  <main id="view-run" class="view">
+    <section class="run-card">
+      <h2 class="sr-only">Training</h2>
+      <div class="run-screen">
+        <div id="state" class="pill state-pill">bereit</div>
+        <div id="timeLeft" class="run-time">00:00</div>
+        <div id="exerciseNow" class="run-exercise">–</div>
+        <div id="roundInfo" class="run-round">–</div>
+
+        <div class="progressbar">
+          <div id="progress" class="progressbar-inner"></div>
+        </div>
+
+        <div class="run-controls">
+          <button id="startBtn">Start</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="skipBtn">Skip</button>
+          <button id="stopBtn" class="ghost">Stopp</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
